@@ -1,4 +1,6 @@
 <?php
 
+// some commnent...
+
 phpinfo();
 
