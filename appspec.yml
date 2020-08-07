@@ -3,4 +3,17 @@ os: linux
 files:
   - source: /
     destination: /var/www/html
+hooks:
+  BeforeInstall:
+    - location: echo BeforeInstall >> /var/www/html/codedeploy.log
+      runas: ec2-user
+  AfterInstall:
+    - location: cd /var/www/html && echo AfterInstallStart >> /var/www/html/codedeploy.log && git fetch origin master && git reset origin/master && echo AfterInstallEnd >> /var/www/html/codedeploy.log
+      runas: ec2-user
+  ApplicationStart:
+    - location: echo ApplicationStart >> /var/www/html/codedeploy.log
+      runas: ec2-user
+  ApplicationStop:
+    - location: echo ApplicationStop >> /var/www/html/codedeploy.log
+      runas: ec2-user
 
